@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Infografía interactiva sobre los derechos reales: concepto, elementos, objeto, causa, propiedad, posesión y tenencia." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Derechos Reales | Infografía Interactiva</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-1: #08111f;
+      --bg-2: #102a55;
+      --blue: #1e3a8a;
+      --gold: #facc15;
+      --gold-dark: #d9a514;
+      --white: #ffffff;
+      --muted: #dbeafe;
+      --text: #f8fafc;
+      --glass: rgba(255, 255, 255, 0.11);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --max: 1120px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.22), transparent 32%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .9), rgba(0, 0, 0, .2));
+    }
+
+    a {
+      color: inherit;
+    }
+
+    main {
+      min-height: 100vh;
+      padding-top: 0;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      padding: 46px 22px;
+      animation: fadeUp .45s ease both;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero,
+    .card {
+      width: min(100%, var(--max));
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(145deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, .07));
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      min-height: 620px;
+    }
+
+    .hero-content,
+    .card-content {
+      padding: clamp(28px, 5vw, 60px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      color: #111827;
+      background: rgba(250, 204, 21, .94);
+      font-size: .86rem;
+      font-weight: 800;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.65rem, 7vw, 5.7rem);
+      line-height: .96;
+      letter-spacing: -2.6px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.08;
+      letter-spacing: -1.4px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      max-width: 860px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1.05rem;
+    }
+
+    .lead {
+      font-size: clamp(1.04rem, 1.7vw, 1.26rem);
+      color: #f8fafc;
+      margin-bottom: 24px;
+    }
+
+    .hero-image,
+    .card-image-wrap {
+      position: relative;
+      min-height: 100%;
+      isolation: isolate;
+    }
+
+    .hero-image img,
+    .card-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.04);
+    }
+
+    .hero-image::after,
+    .card-image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8, 17, 31, .66), rgba(8, 17, 31, .04));
+      z-index: 1;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .option,
+    .back,
+    .primary {
+      min-height: 54px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-family: inherit;
+      font-size: .98rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+
+    .option,
+    .primary {
+      color: #111827;
+      background: linear-gradient(135deg, #fde68a, var(--gold));
+      box-shadow: 0 14px 28px rgba(250, 204, 21, .2);
+    }
+
+    .back {
+      color: #0f172a;
+      background: var(--white);
+      margin-top: 30px;
+    }
+
+    .option:hover,
+    .primary:hover,
+    .back:hover,
+    .option:focus-visible,
+    .primary:focus-visible,
+    .back:focus-visible {
+      transform: translateY(-3px) scale(1.015);
+      filter: brightness(1.03);
+      outline: 3px solid rgba(250, 204, 21, .3);
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: stretch;
+    }
+
+    .card-image-wrap {
+      min-height: 520px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: #eef6ff;
+      line-height: 1.65;
+    }
+
+    .icon {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(250, 204, 21, .16);
+    }
+
+    .note {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--gold);
+      border-radius: 16px;
+      background: rgba(15, 23, 42, .38);
+      color: #ffffff;
+    }
+
+    .subgrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .09);
+      border: 1px solid rgba(255, 255, 255, .12);
+      text-align: left;
+    }
+
+    .mini-card p {
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    .footer-note {
+      width: min(100%, var(--max));
+      margin: -26px auto 28px;
+      padding: 0 22px;
+      color: rgba(255, 255, 255, .66);
+      font-size: .82rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+
+      .hero,
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 300px;
+        order: -1;
+      }
+
+      .card-image-wrap {
+        min-height: 280px;
+      }
+
+      .hero-image::after,
+      .card-image-wrap::after {
+        background: linear-gradient(180deg, rgba(8, 17, 31, .12), rgba(8, 17, 31, .62));
+      }
+
+      .subgrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .screen {
+        padding: 28px 14px;
+        align-items: flex-start;
+      }
+
+      .hero-content,
+      .card-content {
+        padding: 26px 18px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .list li {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <section id="menuPrincipal" class="screen active" aria-labelledby="titulo-principal">
+      <div class="hero">
+        <div class="hero-content">
+          <span class="eyebrow">Guía jurídica interactiva</span>
+          <h1 id="titulo-principal">Los Derechos Reales</h1>
+          <p class="lead"
+          </p>
+
+          <div class="menu-grid" aria-label="Menú de contenido">
+            <button class="option" type="button" onclick="mostrar('concepto')">¿Qué es?</button>
+            <button class="option" type="button" onclick="mostrar('elementos')">Elementos</button>
+            <button class="option" type="button" onclick="mostrar('clasificacion')">Clasificación</button>
+            <button class="option" type="button" onclick="mostrar('propiedad')">Propiedad</button>
+            <button class="option" type="button" onclick="mostrar('relaciones')">Relaciones de poder</button>
+          </div>
+        </div>
+
+        <div class="hero-image" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1400&auto=format&fit=crop" alt="Estatua de la justicia y libros jurídicos" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <section id="concepto" class="screen" aria-labelledby="titulo-concepto">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1400&auto=format&fit=crop" alt="Personas cerrando un acuerdo jurídico" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Concepto base</span>
+          <h2 id="titulo-concepto">¿Qué es un derecho real?</h2>
+          <p>
+            Es el poder jurídico que una persona ejerce de forma directa e inmediata sobre un bien, conforme a la ley y con protección frente a terceros.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">✅</span><span>Existe una relación directa entre la persona titular y el bien.</span></li>
+            <li><span class="icon">🛡️</span><span>Puede hacerse valer frente a terceros, porque la ley reconoce y protege ese derecho.</span></li>
+            <li><span class="icon">⚖️</span><span>Su ejercicio debe respetar los límites legales, sociales y constitucionales.</span></li>
+            <li><span class="icon">📌</span><span>Puede generar facultades como usar, gozar, administrar, transferir o reivindicar el bien.</span></li>
+          </ul>
+
+          <p class="note">
+            Ejemplo: si una persona es propietaria de una casa, puede habitarla, arrendarla o venderla, siempre que actúe dentro del marco legal.
+          </p>
+
+          <button class="back" type="button" onclick="volver()">⬅ Volver al menú</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="elementos" class="screen" aria-labelledby="titulo-elementos">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1400&auto=format&fit=crop" alt="Documentos jurídicos y contrato" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Estructura jurídica</span>
+          <h2 id="titulo-elementos">Elementos de los derechos reales</h2>
+          <p>
+            Para que exista un derecho real deben concurrir tres elementos: sujeto, objeto y causa. Sin esos pilares, el derecho queda como una casa sin cimientos.
+          </p>
+
+          <div class="subgrid">
+            <div class="mini-card">
+              <h3>👤 Sujeto</h3>
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>🏠 Objeto</h3>
+            </div>
+            <div class="mini-card">
+              <h3>📜 Causa</h3>
+            </div>
+          </div>
+
+          <div class="menu-grid">
+            <button class="option" type="button" onclick="mostrar('sujeto')">Ver sujeto</button>
+            <button class="option" type="button" onclick="mostrar('objeto')">Ver objeto</button>
+            <button class="option" type="button" onclick="mostrar('causa')">Ver causa</button>
+          </div>
+
+          <button class="back" type="button" onclick="volver()">⬅ Volver al menú</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="sujeto" class="screen" aria-labelledby="titulo-sujeto">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1400&auto=format&fit=crop" alt="Personas reunidas en una mesa de trabajo" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Primer elemento</span>
+          <h2 id="titulo-sujeto">Sujeto</h2>
+          <p>
+            Es la persona titular del derecho real. Puede ejercer poder jurídico sobre un bien, siempre que tenga capacidad reconocida por el ordenamiento jurídico.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">👤</span><span><strong>Persona natural:</strong> individuo con derechos y obligaciones.</span></li>
+            <li><span class="icon">🏢</span><span><strong>Persona jurídica:</strong> empresa, institución, fundación u organización legalmente reconocida.</span></li>
+            <li><span class="icon">⚖️</span><span><strong>Facultades:</strong> dominio, uso, goce, usufructo, habitación, administración o disposición, según el caso.</span></li>
+          </ul>
+
+          <button class="back" type="button" onclick="mostrar('elementos')">⬅ Regresar a elementos</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="objeto" class="screen" aria-labelledby="titulo-objeto">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1400&auto=format&fit=crop" alt="Casa moderna como ejemplo de bien inmueble" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Segundo elemento</span>
+          <h2 id="titulo-objeto">Objeto</h2>
+          <p>
+            Es el bien sobre el cual recae el derecho real. Puede tratarse de un bien mueble o inmueble, siempre que sea lícito, identificable y susceptible de apropiación.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">🚗</span><span><strong>Bienes muebles:</strong> vehículos, dinero, muebles, equipos, mercaderías y otros bienes que pueden trasladarse.</span></li>
+            <li><span class="icon">🏠</span><span><strong>Bienes inmuebles:</strong> casas, terrenos, edificios, departamentos y bienes adheridos permanentemente al suelo.</span></li>
+            <li><span class="icon">✅</span><span><strong>Requisitos:</strong> debe ser lícito, determinado o determinable, identificable y susceptible de apropiación.</span></li>
+          </ul>
+
+          <p class="note">
+            Ejemplo: en el derecho de propiedad sobre una casa, la casa es el objeto sobre el cual el titular ejerce su poder jurídico.
+          </p>
+
+          <button class="back" type="button" onclick="mostrar('elementos')">⬅ Regresar a elementos</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="causa" class="screen" aria-labelledby="titulo-causa">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?q=80&w=1400&auto=format&fit=crop" alt="Firma de contrato" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Tercer elemento</span>
+          <h2 id="titulo-causa">Causa</h2>
+          <p>
+            Es el hecho o acto jurídico que origina, modifica o transmite el derecho sobre una cosa. Es la razón jurídica que explica por qué nace ese derecho.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">🤝</span><span><strong>Contrato de compraventa:</strong> transmite el dominio cuando cumple los requisitos legales.</span></li>
+            <li><span class="icon">⚰️</span><span><strong>Herencia:</strong> transmite derechos patrimoniales por causa de muerte.</span></li>
+            <li><span class="icon">⏳</span><span><strong>Prescripción adquisitiva:</strong> permite adquirir dominio por posesión prolongada y demás requisitos de ley.</span></li>
+            <li><span class="icon">🏛️</span><span><strong>Decisión judicial:</strong> puede declarar, reconocer o modificar derechos sobre bienes.</span></li>
+          </ul>
+
+          <button class="back" type="button" onclick="mostrar('elementos')">⬅ Regresar a elementos</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="clasificacion" class="screen" aria-labelledby="titulo-clasificacion">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1400&auto=format&fit=crop" alt="Paisaje natural como ejemplo de objeto natural" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Clasificación</span>
+          <h2 id="titulo-clasificacion">Clasificación de los objetos</h2>
+          <p>
+            Los objetos pueden clasificarse según su naturaleza, existencia y valor jurídico. En materia de derechos reales, interesa principalmente si pueden ser objeto de apropiación y valoración patrimonial.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">🌿</span><span><strong>Naturales:</strong> existen en la naturaleza, sin creación humana directa.</span></li>
+            <li><span class="icon">🏛️</span><span><strong>Culturales:</strong> creaciones humanas con valor social, económico o jurídico.</span></li>
+            <li><span class="icon">💭</span><span><strong>Ideales:</strong> no tienen existencia física, pero pueden tener relevancia jurídica o patrimonial.</span></li>
+            <li><span class="icon">✨</span><span><strong>Abstractos o metafísicos:</strong> representan valores, ideas o intereses no materiales.</span></li>
+          </ul>
+
+          <button class="back" type="button" onclick="volver()">⬅ Volver al menú</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="propiedad" class="screen" aria-labelledby="titulo-propiedad">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=1400&auto=format&fit=crop" alt="Interior de una propiedad" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Derecho principal</span>
+          <h2 id="titulo-propiedad">Derecho de propiedad</h2>
+          <p>
+            Es el derecho real por excelencia. Permite al titular usar, gozar y disponer de un bien, con las limitaciones establecidas por la ley y por la función social de la propiedad.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">👁️</span><span><strong>Usar:</strong> servirse del bien conforme a su naturaleza.</span></li>
+            <li><span class="icon">🌾</span><span><strong>Gozar:</strong> percibir frutos, rentas o beneficios.</span></li>
+            <li><span class="icon">📝</span><span><strong>Disponer:</strong> vender, donar, transferir, gravar o administrar el bien.</span></li>
+            <li><span class="icon">🛡️</span><span><strong>Defender:</strong> proteger el bien frente a perturbaciones o despojos.</span></li>
+          </ul>
+
+          <p class="note">
+            También existen formas de propiedad sobre bienes incorporales o intelectuales, como obras, marcas, invenciones y creaciones artísticas.
+          </p>
+
+          <button class="back" type="button" onclick="volver()">⬅ Volver al menú</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="relaciones" class="screen" aria-labelledby="titulo-relaciones">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop" alt="Reunión profesional sobre relaciones jurídicas" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Control sobre la cosa</span>
+          <h2 id="titulo-relaciones">Relaciones de poder</h2>
+          <p>
+            Son las formas en que una persona ejerce control material o jurídico sobre un bien. Las dos figuras más comunes son la posesión y la tenencia.
+          </p>
+
+          <div class="subgrid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+            <div class="mini-card">
+              <h3>🏠 Posesión</h3>
+              <p>Hay control material y ánimo de señor y dueño.</p>
+            </div>
+            <div class="mini-card">
+              <h3>🔑 Tenencia</h3>
+              <p>Hay control físico, pero se reconoce dominio ajeno.</p>
+            </div>
+          </div>
+
+          <div class="menu-grid">
+            <button class="option" type="button" onclick="mostrar('posesion')">Ver posesión</button>
+            <button class="option" type="button" onclick="mostrar('tenencia')">Ver tenencia</button>
+          </div>
+
+          <button class="back" type="button" onclick="volver()">⬅ Volver al menú</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="posesion" class="screen" aria-labelledby="titulo-posesion">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1400&auto=format&fit=crop" alt="Casa familiar como ejemplo de posesión" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Relación de poder</span>
+          <h2 id="titulo-posesion">Posesión</h2>
+          <p>
+            Existe cuando una persona ejerce control sobre un bien con ánimo de señor y dueño, aunque todavía no tenga necesariamente el título de propietario.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">✋</span><span><strong>Corpus:</strong> control material o físico sobre la cosa.</span></li>
+            <li><span class="icon">🧠</span><span><strong>Animus:</strong> intención de actuar como propietario.</span></li>
+            <li><span class="icon">⏳</span><span><strong>Importancia:</strong> puede tener efectos jurídicos relevantes, incluso en procesos de prescripción adquisitiva.</span></li>
+          </ul>
+
+          <p class="note">
+            Ejemplo: una persona ocupa y cuida una casa durante años, actuando públicamente como dueño.
+          </p>
+
+          <button class="back" type="button" onclick="mostrar('relaciones')">⬅ Regresar a relaciones</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="tenencia" class="screen" aria-labelledby="titulo-tenencia">
+      <article class="card">
+        <div class="card-image-wrap">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop" alt="Llaves de inmueble arrendado" loading="lazy" />
+        </div>
+        <div class="card-content">
+          <span class="eyebrow">Relación de poder</span>
+          <h2 id="titulo-tenencia">Tenencia</h2>
+          <p>
+            Ocurre cuando una persona tiene físicamente un bien, pero reconoce que pertenece a otra persona. Hay control material, pero no ánimo de dueño.
+          </p>
+
+          <ul class="list">
+            <li><span class="icon">✅</span><span>Existe control físico o uso del bien.</span></li>
+            <li><span class="icon">❌</span><span>No existe intención jurídica de comportarse como propietario.</span></li>
+            <li><span class="icon">🔑</span><span>Ejemplo clásico: el inquilino que vive en una casa alquilada.</span></li>
+          </ul>
+
+          <p class="note">
+            La posesión puede ser legítima o ilegítima, de buena fe o mala fe, según el título, la conducta y el conocimiento de quien la ejerce.
+          </p>
+
+          <button class="back" type="button" onclick="mostrar('relaciones')">⬅ Regresar a relaciones</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <p class="footer-note">
+    Material académico e informativo. Para uso profesional o judicial, debe adaptarse al caso concreto y a la normativa aplicable.
+  </p>
+
+  <script>
+    const screens = Array.from(document.querySelectorAll('.screen'));
+
+    function mostrar(id) {
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      screens.forEach(screen => screen.classList.remove('active'));
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    }
+
+    function volver() {
+      mostrar('menuPrincipal');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const initial = location.hash.replace('#', '');
+      if (initial && document.getElementById(initial)) {
+        mostrar(initial);
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') volver();
+    });
+  </script>
+</body>
+</html>
